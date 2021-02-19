@@ -1,0 +1,44 @@
+Year,Pollutant Name,PollCode,PlantID,Site,Easting,Northing,Operator,SectorID,Sector,Emission,Unit,Region,Datatype,Emissions (KT)
+2018,CO,4,40537,Port Talbot Sinter,276520,188020,Tata Steel Ltd,13,Iron & steel industries,54240.51546,Tonnes,Wales,O,54.24051546
+2018,CO,4,40546,Scunthorpe Sinter,492050,409660,British Steel Ltd,13,Iron & steel industries,46173.68,Tonnes,England,O,46.17368
+2018,CO,4,40539,Port Talbot Oxygen Furnaces,277315,186820,Tata Steel Ltd,13,Iron & steel industries,26547.6744,Tonnes,Wales,O,26.5476744
+2018,CO,4,40538,Port Talbot Blast Furnaces,277090,188030,Tata Steel Ltd,13,Iron & steel industries,24377.59913,Tonnes,Wales,O,24.37759913
+2018,CO,4,40548,Scunthorpe Oxygen Furnaces,492990,408610,British Steel Ltd,13,Iron & steel industries,19477,Tonnes,England,O,19.477
+2018,CO,4,40540,Port Talbot Morfa Coke Ovens,277070,185800,Tata Steel Ltd,13,Iron & steel industries,6321.029051,Tonnes,Wales,M,6.321029051
+2018,CO,4,40547,Scunthorpe Blast Furnaces,491624,410272,British Steel Ltd,13,Iron & steel industries,4099.43,Tonnes,England,O,4.09943
+2018,CO,4,9949,Tremorfa 2,321201,176295,Celsa Manufacturing UK Ltd,13,Iron & steel industries,727.0004842,Tonnes,Wales,O,0.727000484
+2018,CO,4,14419,Scunthorpe Integrated Works,490510,411116,British Steel Ltd,13,Iron & steel industries,555.2794057,Tonnes,England,M,0.555279406
+2018,CO,4,40542,Port Talbot Power Station,277150,188450,Tata Steel Ltd,13,Iron & steel industries,495.8,Tonnes,Wales,O,0.4958
+2018,CO,4,4390,Sheffield,439500,389800,OUTOKUMPU STAINLESS LTD,13,Iron & steel industries,462,Tonnes,England,O,0.462
+2018,CO,4,40549,Scunthorpe Appleby Coke Ovens,491655,410975,British Steel Ltd,13,Iron & steel industries,394.54,Tonnes,England,M,0.39454
+2018,CO,4,40545,Port Talbot BFG Flaring,277270,187990,Tata Steel Ltd,13,Iron & steel industries,277.1567556,Tonnes,Wales,O,0.277156756
+2018,CO,4,14962,Liberty Speciality Steels - Rotherham,445073,395125,Speciality Steel UK Ltd,13,Iron & steel industries,263.7691869,Tonnes,England,M,0.263769187
+2018,CO,4,40228,Rotherham Aldwarke Site,445000,395000,Speciality Steel UK Limited,13,Iron & steel industries,182.187,Tonnes,England,O,0.182187
+2018,CO,4,8714,Sheffield,440400,389180,Outokumpu Stainless Ltd,13,Iron & steel industries,97.51350167,Tonnes,England,M,0.097513502
+2018,CO,4,11724,River Don,438398,390075,Sheffield Forgemasters International Limited,13,Iron & steel industries,47.63,Tonnes,England,O,0.04763
+2018,CO,4,6548,Tipton,398190,292980,ERVIN AMASTEEL,13,Iron & steel industries,38.1,Tonnes,England,M,0.0381
+2018,CO,4,14420,Teesside Beam Mill,454200,522000,British Steel Ltd,13,Iron & steel industries,33.60846153,Tonnes,England,M,0.033608462
+2018,CO,4,14963,Liberty Speciality Steels - Stocksbridge,427168,398653,Speciality Steel UK Ltd,13,Iron & steel industries,28.63324293,Tonnes,England,M,0.028633243
+2018,CO,4,8357,Trostre,252900,199400,Tata Steel UK Ltd,13,Iron & steel industries,23.89441606,Tonnes,Wales,M,0.023894416
+2018,CO,4,8534,Llanwern Steelworks,335100,186500,Tata Steel UK Ltd,13,Iron & steel industries,23.67691734,Tonnes,Wales,M,0.023676917
+2018,CO,4,14013,Tremorfa Sections Mill,320354,175955,CELSA Manufacturing (UK) Ltd,13,Iron & steel industries,23.64070602,Tonnes,Wales,M,0.023640706
+2018,CO,4,8708,Shotton,331400,369500,Tata Steel UK Ltd,13,Iron & steel industries,23.26040437,Tonnes,Wales,M,0.023260404
+2018,CO,4,13699,Sheffield,438634,389821,Sheffield Forgemasters Engineering Ltd,13,Iron & steel industries,17.99120746,Tonnes,England,M,0.017991207
+2018,CO,4,14181,Newport,333270,185120,Liberty Steel Newport Ltd,13,Iron & steel industries,17.71679725,Tonnes,Wales,M,0.017716797
+2018,CO,4,14421,Skinningrove,470750,519590,British Steel Ltd,13,Iron & steel industries,15.62692445,Tonnes,England,M,0.015626924
+2018,CO,4,7783,Sheffield,439600,390000,Betafence Ltd,13,Iron & steel industries,14.77698454,Tonnes,England,M,0.014776985
+2018,CO,4,13714,Gateshead,423600,562000,Spartan UK Ltd,13,Iron & steel industries,12.43510847,Tonnes,England,M,0.012435108
+2018,CO,4,13645,Corby Tubeworks,490860,289140,Tata Steel UK Ltd,13,Iron & steel industries,12.03267169,Tonnes,England,M,0.012032672
+2018,CO,4,14014,Castle Works,319700,175200,CELSA Manufacturing (UK) Ltd,13,Iron & steel industries,10.7244578,Tonnes,Wales,M,0.010724458
+2018,CO,4,9620,Orb Works,332940,186660,Tata Steel UK Ltd,13,Iron & steel industries,9.7908391,Tonnes,Wales,M,0.009790839
+2018,CO,4,13672,Scunthorpe,491300,410300,Liberty Merchant Bar plc,13,Iron & steel industries,8.193146051,Tonnes,England,M,0.008193146
+2018,CO,4,13686,Hartlepool Pipe Mill,450869,528850,Tata Steel UK Ltd,13,Iron & steel industries,7.709492641,Tonnes,England,M,0.007709493
+2018,CO,4,14698,Dalzell Works,275802,656788,Liberty Steel Dalzell Ltd,13,Iron & steel industries,7.613116132,Tonnes,Scotland,M,0.007613116
+2018,CO,4,13622,Livingston,305550,669656,Wyman-Gordon Ltd,13,Iron & steel industries,6.791110122,Tonnes,Scotland,M,0.00679111
+2018,CO,4,4389,Sheepbridge,437230,374570,Gkn Cylinder Liners,13,Iron & steel industries,5,Tonnes,England,M,0.005
+2018,CO,4,8913,Tremorfa 2,321200,176300,CELSA Manufacturing (UK) Ltd,13,Iron & steel industries,4.474632083,Tonnes,Wales,M,0.004474632
+2018,CO,4,14964,Liberty Speciality Steels - Brinsworth,440928,391280,Speciality Steel UK Ltd,13,Iron & steel industries,3.501594324,Tonnes,England,M,0.003501594
+2018,CO,4,13641,Dudley Site,393010,288320,Acenta Steel Ltd,13,Iron & steel industries,2.975812965,Tonnes,England,M,0.002975813
+2018,CO,4,8420,River Don,438200,390100,Sheffield Forgemasters Steel Ltd,13,Iron & steel industries,2.54079343,Tonnes,England,M,0.002540793
+2018,CO,4,40543,Port Talbot Rolling Mill Furnaces,277990,187050,Tata Steel Ltd,13,Iron & steel industries,1.873085,Tonnes,Wales,O,0.001873085
+2018,CO,4,14699,Clydebridge Works,263681,661076,Liberty Steel Clydebridge Ltd,13,Iron & steel industries,0.433352476,Tonnes,Scotland,M,0.000433352
