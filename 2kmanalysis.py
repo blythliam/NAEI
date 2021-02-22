@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 import time
 import os
+from scipy import ndimage
 
 #%%
 " Setting variables depending on desired outputs "
@@ -30,7 +31,7 @@ map_path ='C:/Users/lpb20/OneDrive - Imperial College London/Documents/Odyssey/N
 
 footprint_path = 'C:/Users/lpb20/OneDrive - Imperial College London/Documents/Odyssey/Footprints/2km_footprints/IMP_26magl/Fields_files'
 
-if spat_ocean == True:
+if spat_ocean:
     os.chdir('//home/lpb20/NAEI')
     
     area_grid_cell_path = './area_file'
@@ -80,7 +81,7 @@ days_num = len(files)
 
 XCO = np.zeros([24*days_num,10])
 CO_g_m3 = np.zeros([24 * days_num,10])
-
+C_of_m = np.zeros([24 * days_num,2])
 
 
 start = time.time()
@@ -104,6 +105,8 @@ for z, file in enumerate(files):
     for j in range(24):
                 
         for t in range(10):
+            C_of_m[(z*24 + j),0] = ndimage.measurements.center_of_mass(footprint[j,:,:])[0]
+            C_of_m[(z*24 + j),1] = ndimage.measurements.center_of_mass(footprint[j,:,:])[1]
             M = mapped_data[:,:,t] * footprint[j,:,:] * area_grid_cell / 3600
     
             CO_g_m3[(z*24 + j), t] = np.sum(M)
