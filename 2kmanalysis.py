@@ -17,7 +17,7 @@ from scipy import ndimage
 " Setting variables depending on desired outputs "
 
 plot = True
-D14_plot = False
+D14_plot = True
 file_write = False
 spat_ocean = False
 
@@ -75,14 +75,15 @@ mol_CO = 28 # Molar mass of CO
 #%%
 
 
-files = glob.glob(footprint_path + '/*.txt')
+files = glob.glob(footprint_path + '/*.txt')[:25]
 
 days_num = len(files)
 
 XCO = np.zeros([24*days_num,10])
 CO_g_m3 = np.zeros([24 * days_num,10])
 C_of_m = np.zeros([24 * days_num,2])
-
+tot_14C = np.zeroes[627,767]
+tot_14C_count = np.zeros[627,767]
 
 start = time.time()
 
@@ -106,26 +107,30 @@ for z, file in enumerate(files):
                 
         for t in range(10):
             C_of_m[(z*24 + j),0] = ndimage.measurements.center_of_mass(footprint[j,:,:])[0]
-            C_of_m[(z*24 + j),1] = ndimage.measurements.center_of_mass(footprint[j,:,:])[1]
-            M = mapped_data[:,:,t] * footprint[j,:,:] * area_grid_cell / 3600
-    
+            C_of_m[(z*24 + j),1] = ndimage.measurements.center_of_mass(footprint[j,:,:])[1]           M = mapped_data[:,:,t] * footprint[j,:,:] * area_grid_cell / 3600
+            
             CO_g_m3[(z*24 + j), t] = np.sum(M)
             XCO[z*24 + j, t] = (np.sum((M / p) * (mol_air/mol_CO) * 1e9))
 
+    
 end = time.time()
 print('----------------------------------')
 print('\t' + str(int(len(files)/30)) + ' months of analysis took ' + str(int(((end - start)/60))) + ' mins')
 print('----------------------------------')
 
 #%%
-#centre_of_mass[:,2] = np.sum(XCO, axis = 1)
 
-if file_write == True:
+    
+
+
+
+
+if file_write:
     
     np.savetxt('output.csv', XCO, delimiter=',')
 
 
-if plot == True:
+if plot:
     import matplotlib.pyplot as plt
     import seaborn as sns
 
@@ -148,17 +153,32 @@ if plot == True:
     
     plt.ylabel('% of CO from sector')
     plt.xlabel('SNAP sector')
-    if D14_plot == True:
-        D14 = np.array([-329,-784,-787,-1000,22,-1000,-1000,-1000,-33.7,-463])
-        
-        factor = (1000 + D14)*1e-3 * 1.176e-12
-        
-        D14CO = CO_g_m3 * factor * 1e-4 * 6.02e23/30
-        D14CO_sum = np.sum(D14CO, axis = 1)
-        plt.figure()
-        sns.histplot(D14CO_sum)
-        plt.xlabel('$^{14}$CO (molecules cm$^{-3}$)')
+    
+#    plt.figure()
+#    plt.plot(np.sqrt(C_of_m[:,0]**2 + C_of_m[:,1]**2), np.sum(XCO, axis = 1), 'x')
+    
+    
+    
+    if D14_plot:
+        for i in [-450,-300]:
+            D14 = np.array([i,-787,-787,-1000,33,-1000,-1000,-1000,-19,-449])
+            
+            factor = (1000 + D14)*1e-3 * 1.176e-12
+            
+            D14CO = CO_g_m3 * factor * 1e-4 * 6.02e23/30
+            D14CO_sum = np.sum(D14CO, axis = 1)
+            box_data = pd.DataFrame(D14CO / D14CO_sum.reshape([24 * days_num,1]),columns = columns)
+#            plt.figure()
+#            box_data.boxplot()
+            if i == -450:
+                plt.figure()
+#            sns.histplot(D14CO_sum, stat = 'density')
+            box_data.boxplot()
+            plt.xlabel('$^{14}$CO (molecules cm$^{-3}$)')
 
+#        plt.figure()
+#        plt.plot(np.sqrt(C_of_m[:,0]**2 + C_of_m[:,1]**2), D14CO_sum, 'x')
+    
 
 
 
