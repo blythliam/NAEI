@@ -12,7 +12,7 @@ import glob
 import netCDF4 as nc
 
 
-emis_fact = pd.read_csv('C:/Users/lpb20/OneDrive - Imperial College London/Documents/Odyssey/NAEI/emissionfactors.txt',sep = '\t',index_col=0,header=None)
+#emis_fact = pd.read_csv('C:/Users/lpb20/OneDrive - Imperial College London/Documents/Odyssey/NAEI/emissionfactors.txt',sep = '\t',index_col=0,header=None)
 
 
 
@@ -33,26 +33,18 @@ sep_maps_no14 = np.zeros([1378,812,12])
 for j,file in enumerate(files):
 
     mapped_data=np.zeros([1378,812])
-    if j<10:
-        emit_fact = emis_fact.iloc[j].values
-    else:
-        emit_fact = 1
-    print(j,emit_fact,file)
+#    print(j,emit_fact,file)
     f = open(file,'r')
     for i,line in enumerate(f):
         if i>5:
             columns = line.split()
             columns = [float(i) for i in columns]
             mapped_data[i-6,:] = columns
-            mapped_data[mapped_data<0] = 0
+    mapped_data[mapped_data<0] = 0
     sep_maps[:,:,j] = mapped_data
-    sep_maps_14[:,:,j] = emit_fact * mapped_data
-    sep_maps_no14[:,:,j] = mapped_data * (1-emit_fact)
-    sector_prod.append(np.sum(mapped_data))
-final = np.sum(sep_maps[:,:,:10],axis = 2)
-final_14 = np.sum(sep_maps_14[:,:,:10],axis = 2) * 1e-12
-final_no14 = np.sum(sep_maps_no14[:,:,:10],axis = 2) * 1e-12
-sector_prod = np.array(sector_prod)
+
+
+sector_prod = np.sum(np.sum(sep_maps, axis = 0),axis = 0)/1e3
 #%%
 import re
 

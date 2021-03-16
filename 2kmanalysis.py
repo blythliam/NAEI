@@ -18,16 +18,17 @@ from scipy import ndimage
 
 plot = True
 D14_plot = True
-file_write = False
+file_write = True
 spat_ocean = False
 
 
 #%%
 " Loading file paths to be used later in routine "
-# Path to 
+
+root_path = 'C:/Users/lpb20/OneDrive - Imperial College London/Documents/Odyssey/NAEI'
 area_grid_cell_path =  'C:/Users/lpb20/OneDrive - Imperial College London/Documents/Odyssey/Footprints'
 
-map_path ='C:/Users/lpb20/OneDrive - Imperial College London/Documents/Odyssey/NAEI/emission_maps'
+map_path =root_path + '/emission_maps'
 
 footprint_path = 'C:/Users/lpb20/OneDrive - Imperial College London/Documents/Odyssey/Footprints/2km_footprints/IMP_26magl/Fields_files'
 
@@ -52,12 +53,13 @@ print('----------------------------------')
 
 #%%
 " Imprting NAEI mapped data (Lat-Lon) and converting to kg "
-
+#import re
 files = glob.glob(map_path + '/*.txt')
- 
+#map_ord = [] 
 mapped_data = np.zeros([627, 767, len(files)])
 
 for i, file in enumerate(files):
+#    re.search('*'), string)
     mapped_data[:,:,i] = np.loadtxt(file, delimiter=',')
     
 print('------------------------------------')
@@ -75,21 +77,21 @@ mol_CO = 28 # Molar mass of CO
 #%%
 
 
-files = glob.glob(footprint_path + '/*.txt')[:25]
+files = glob.glob(footprint_path + '/*.txt')
 
 days_num = len(files)
 
 XCO = np.zeros([24*days_num,10])
 CO_g_m3 = np.zeros([24 * days_num,10])
 C_of_m = np.zeros([24 * days_num,2])
-tot_14C = np.zeroes[627,767]
-tot_14C_count = np.zeros[627,767]
+tot_14C = np.zeros([627,767])
+tot_14C_count = np.zeros([627,767])
 
 start = time.time()
 
 for z, file in enumerate(files):
     if z%5 == 0 :
-        print(len(files)-z)
+        print(days_num-z)
     f = open(file)
     footprint = np.zeros([24,627,767])
 
@@ -107,11 +109,13 @@ for z, file in enumerate(files):
                 
         for t in range(10):
             C_of_m[(z*24 + j),0] = ndimage.measurements.center_of_mass(footprint[j,:,:])[0]
-            C_of_m[(z*24 + j),1] = ndimage.measurements.center_of_mass(footprint[j,:,:])[1]           M = mapped_data[:,:,t] * footprint[j,:,:] * area_grid_cell / 3600
+            C_of_m[(z*24 + j),1] = ndimage.measurements.center_of_mass(footprint[j,:,:])[1]
+
+            M = mapped_data[:,:,t] * footprint[j,:,:] * area_grid_cell / 3600
             
             CO_g_m3[(z*24 + j), t] = np.sum(M)
             XCO[z*24 + j, t] = (np.sum((M / p) * (mol_air/mol_CO) * 1e9))
-
+            
     
 end = time.time()
 print('----------------------------------')
@@ -120,77 +124,8 @@ print('----------------------------------')
 
 #%%
 
-    
-
-
-
-
 if file_write:
     
-    np.savetxt('output.csv', XCO, delimiter=',')
-
-
-if plot:
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-
-   
-    sns.histplot(np.sum(XCO, axis = 1), binwidth=5)
-    plt.xlabel('CO (ppb)')
-    
-    plt.figure()
-    columns = ['Dom','enprod','indcom','indprod','nature','offshore','othertrans',
-               'road_trans','solvent','waste']
-    
-    box_data = pd.DataFrame(XCO *100 / np.sum(XCO,axis = 1).reshape([24 * days_num,1]),columns = columns)
-    box_data.boxplot()
-    
-    columns_em_perc = np.array([29,5.5,13,7,2.5,0.05,27.7,13.5,0.12,2])
-    
-    for i,val in enumerate(columns_em_perc):
-        plt.plot([i+0.5,i+1.5],[val,val],'r--')
-
-    
-    plt.ylabel('% of CO from sector')
-    plt.xlabel('SNAP sector')
-    
-#    plt.figure()
-#    plt.plot(np.sqrt(C_of_m[:,0]**2 + C_of_m[:,1]**2), np.sum(XCO, axis = 1), 'x')
-    
-    
-    
-    if D14_plot:
-        for i in [-450,-300]:
-            D14 = np.array([i,-787,-787,-1000,33,-1000,-1000,-1000,-19,-449])
-            
-            factor = (1000 + D14)*1e-3 * 1.176e-12
-            
-            D14CO = CO_g_m3 * factor * 1e-4 * 6.02e23/30
-            D14CO_sum = np.sum(D14CO, axis = 1)
-            box_data = pd.DataFrame(D14CO / D14CO_sum.reshape([24 * days_num,1]),columns = columns)
-#            plt.figure()
-#            box_data.boxplot()
-            if i == -450:
-                plt.figure()
-#            sns.histplot(D14CO_sum, stat = 'density')
-            box_data.boxplot()
-            plt.xlabel('$^{14}$CO (molecules cm$^{-3}$)')
-
-#        plt.figure()
-#        plt.plot(np.sqrt(C_of_m[:,0]**2 + C_of_m[:,1]**2), D14CO_sum, 'x')
-    
-
-
-
-
-
-
-
-
-
-
-  
-    
-
+    np.savetxt(root_path + '/COmixingratio.csv', XCO, delimiter=',')
 
 
