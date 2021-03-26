@@ -36,22 +36,26 @@ plt.plot(tot_data)
 
 plt.xlim([1850,2020])
 
+years_analysis = np.linspace(2,152,16)
+D14 = []
+for yrs in years_analysis:#= 50
 
-yrs = 100
+    onehundredyears = tot_data[(tot_data.index > 2020 - yrs) & (tot_data.index < 2020)]
+    
+    years = np.array(onehundredyears.index)
+    
+    vals = np.concatenate(onehundredyears.values, axis = 0)
+    
+    Delta_14C = np.trapz(vals, years) / (years[-1] - years[0])
+    D14.append(Delta_14C)
+    print('Trees that have been growing for '+str(yrs)+' yrs have a D14C of: ' + str(Delta_14C))
 
-onehundredyears = tot_data[(tot_data.index > 2020 - yrs) & (tot_data.index < 2020)]
+plt.plot((2020 - years_analysis), D14)
 
-years = np.array(onehundredyears.index)
+plt.ylabel('$\Delta^{14}C$')
+plt.xlabel('Years')
 
-vals = np.concatenate(onehundredyears.values, axis = 0)
-
-Delta_14C = np.trapz(vals, years) / (years[-1] - years[0])
-
-print('Trees that have been growing for '+str(yrs)+' yrs have a D14C of: ' + str(Delta_14C))
-
-
-
-
+plt.legend(['$\Delta^{14}$C$_{atm}$','$\Delta^{14}$C$_{wood}$'])
 
 
 

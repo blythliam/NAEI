@@ -16,8 +16,6 @@ from scipy import ndimage
 #%%
 " Setting variables depending on desired outputs "
 
-plot = True
-D14_plot = True
 file_write = True
 spat_ocean = False
 
@@ -53,13 +51,12 @@ print('----------------------------------')
 
 #%%
 " Imprting NAEI mapped data (Lat-Lon) and converting to kg "
-#import re
+
 files = glob.glob(map_path + '/*.txt')
-#map_ord = [] 
+
 mapped_data = np.zeros([627, 767, len(files)])
 
 for i, file in enumerate(files):
-#    re.search('*'), string)
     mapped_data[:,:,i] = np.loadtxt(file, delimiter=',')
     
 print('------------------------------------')
@@ -83,7 +80,7 @@ days_num = len(files)
 
 XCO = np.zeros([24*days_num,10])
 CO_g_m3 = np.zeros([24 * days_num,10])
-C_of_m = np.zeros([24 * days_num,2])
+C_of_M = np.zeros([24 * days_num,2])
 tot_14C = np.zeros([627,767])
 tot_14C_count = np.zeros([627,767])
 
@@ -108,8 +105,8 @@ for z, file in enumerate(files):
     for j in range(24):
                 
         for t in range(10):
-            C_of_m[(z*24 + j),0] = ndimage.measurements.center_of_mass(footprint[j,:,:])[0]
-            C_of_m[(z*24 + j),1] = ndimage.measurements.center_of_mass(footprint[j,:,:])[1]
+            C_of_M[(z*24 + j),0] = ndimage.measurements.center_of_mass(footprint[j,:,:])[0]-110
+            C_of_M[(z*24 + j),1] = ndimage.measurements.center_of_mass(footprint[j,:,:])[1]-515
 
             M = mapped_data[:,:,t] * footprint[j,:,:] * area_grid_cell / 3600
             
@@ -127,5 +124,5 @@ print('----------------------------------')
 if file_write:
     
     np.savetxt(root_path + '/COmixingratio.csv', XCO, delimiter=',')
-
+    np.savetxt(root_path + '/C_of_M.csv',C_of_M, delimiter=',')
 
